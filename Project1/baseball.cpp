@@ -27,20 +27,33 @@ public:
     {
         assertIncorrectArgument(guessNumber);
 
-        if (guessNumber == question)
+        if (true == isCorrectAnswer(guessNumber))
         {
             return { true, 3, 0 };
         }
 
+        return { false, getStrikes(guessNumber), getBalls(guessNumber) };
+    }
+
+private:
+    string question;
+
+    int getStrikes(const std::string& guessNumber)
+    {
         int strikes = 0;
         for (int i = 0; i < 3; i++)
         {
             if (guessNumber[i] != question[i]) continue;
-            
+
             strikes++;
         }
+        return strikes;
+    }
 
+    int getBalls(const std::string& guessNumber)
+    {
         int balls = 0;
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -51,11 +64,8 @@ public:
             }
         }
 
-        return { false, strikes, balls };
+        return balls;
     }
-
-private:
-    string question;
 
     void assertIncorrectArgument(const std::string& guessNumber)
     {
@@ -82,5 +92,10 @@ private:
         return (guessNumber[0] == guessNumber[1])
             || (guessNumber[0] == guessNumber[2])
             || (guessNumber[1] == guessNumber[2]);
+    }
+
+    bool isCorrectAnswer(const std::string& guessNumber)
+    {
+        return guessNumber == question;
     }
 };
