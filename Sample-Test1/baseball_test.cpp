@@ -26,4 +26,5 @@ protected:
 TEST_F(TestBaseballFixture, ThrowExceptionWhenInvalidCase) {
     assertIncorrectArgument(string("12"));
     assertIncorrectArgument(string("12s"));
+    assertIncorrectArgument(string("121"));
 }
