@@ -5,7 +5,12 @@
 
 using namespace std;
 
-TEST(TestCaseName, ThrowExceptionWhenInputLengthUnmatched) {
+TEST(TestBaseball, ThrowExceptionWhenInputLengthUnmatched) {
     Baseball baseball;
     EXPECT_THROW(baseball.guess(string("12")), length_error);
+}
+
+TEST(TestBaseball, ThrowExceptionWhenInvalidChar) {
+    Baseball baseball;
+    EXPECT_THROW(baseball.guess(string("12s")), invalid_argument);
 }

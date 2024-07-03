@@ -12,5 +12,13 @@ public:
         {
             throw length_error("Must be three letters");
         }
+
+        for (char letter : str)
+        {
+            if ((letter < '0') || (letter > '9'))
+            {
+                throw invalid_argument("Must be number");
+            }
+        }
     }
 };
