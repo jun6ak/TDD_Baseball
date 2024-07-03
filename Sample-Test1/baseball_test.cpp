@@ -10,11 +10,24 @@ class TestBaseballFixture : public testing::Test
 protected:
     Baseball baseball{ "123" };
 
-    void assertIncorrectArgument(string guessNumber)
+    void assertGuessInvalidNumber(string guessNumber)
     {
         try
         {
             baseball.guess(guessNumber);
+            FAIL();
+        }
+        catch (exception& e)
+        {
+            ; // PASS
+        }
+    }
+
+    void assertSetInvalidQuestion(string guessNumber)
+    {
+        try
+        {
+            baseball.setQuestion(guessNumber);
             FAIL();
         }
         catch (exception& e)
@@ -31,10 +44,16 @@ protected:
     }
 };
 
-TEST_F(TestBaseballFixture, ThrowExceptionWhenInvalidCase) {
-    assertIncorrectArgument(string("12"));
-    assertIncorrectArgument(string("12s"));
-    assertIncorrectArgument(string("121"));
+TEST_F(TestBaseballFixture, ThrowExceptionWhenInvalidCase_guess) {
+    assertGuessInvalidNumber(string("12"));
+    assertGuessInvalidNumber(string("12s"));
+    assertGuessInvalidNumber(string("121"));
+}
+
+TEST_F(TestBaseballFixture, ThrowExceptionWhenInvalidCase_setquestion) {
+    assertSetInvalidQuestion(string("12"));
+    assertSetInvalidQuestion(string("12s"));
+    assertSetInvalidQuestion(string("121"));
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResultIfMatchedNumber) {
@@ -71,4 +90,20 @@ TEST_F(TestBaseballFixture, ReturnSolvedResult_0S3B) {
     GuessResult result = baseball.guess("312");
 
     checkResult(result, false, 0, 3);
+}
+
+TEST_F(TestBaseballFixture, ReturnSolvedResult2_0S3B) {
+    baseball.setQuestion("312");
+
+    GuessResult result = baseball.guess("123");
+
+    checkResult(result, false, 0, 3);
+}
+
+TEST_F(TestBaseballFixture, ReturnSolvedResult_0S0B) {
+    baseball.setQuestion("456");
+
+    GuessResult result = baseball.guess("129");
+
+    checkResult(result, false, 0, 0);
 }

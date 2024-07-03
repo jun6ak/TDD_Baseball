@@ -16,7 +16,14 @@ public:
     Baseball(const string& question) : question(question)
     { }
 
-    GuessResult guess(string guessNumber)
+    void setQuestion(const string& newQuestion)
+    {
+        assertIncorrectArgument(newQuestion);
+
+        question = newQuestion;
+    }
+
+    GuessResult guess(const string guessNumber)
     {
         assertIncorrectArgument(guessNumber);
 
@@ -50,7 +57,7 @@ public:
 private:
     string question;
 
-    void assertIncorrectArgument(std::string& guessNumber)
+    void assertIncorrectArgument(const std::string& guessNumber)
     {
         if (guessNumber.length() != 3)
         {
@@ -70,7 +77,7 @@ private:
         }
     }
 
-    bool isDuplicatedNumber(std::string& guessNumber)
+    bool isDuplicatedNumber(const std::string& guessNumber)
     {
         return (guessNumber[0] == guessNumber[1])
             || (guessNumber[0] == guessNumber[2])
