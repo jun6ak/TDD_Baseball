@@ -34,12 +34,15 @@ public:
         }
 
         int balls = 0;
-        if (guessNumber[0] == question[2]) balls++;
-        if (guessNumber[2] == question[0]) balls++;
-        if (guessNumber[2] == question[1]) balls++;
-        if (guessNumber[0] == question[1]) balls++;
-        if (guessNumber[1] == question[2]) balls++;
-        if (guessNumber[1] == question[0]) balls++;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (i == j) continue;
+                if (guessNumber[i] != question[j]) continue;
+                balls++;
+            }
+        }
 
         return { false, strikes, balls };
     }

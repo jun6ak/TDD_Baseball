@@ -9,6 +9,7 @@ class TestBaseballFixture : public testing::Test
 {
 protected:
     Baseball baseball{ "123" };
+
     void assertIncorrectArgument(string guessNumber)
     {
         try
@@ -37,43 +38,37 @@ TEST_F(TestBaseballFixture, ThrowExceptionWhenInvalidCase) {
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResultIfMatchedNumber) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("123");
+    GuessResult result = baseball.guess("123");
 
     checkResult(result, true, 3, 0);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult1_2S0B) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("124");
+    GuessResult result = baseball.guess("124");
 
     checkResult(result, false, 2, 0);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult2_2S0B) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("423");
+    GuessResult result = baseball.guess("423");
 
     checkResult(result, false, 2, 0);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult_1S2B) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("321");
+    GuessResult result = baseball.guess("321");
 
     checkResult(result, false, 1, 2);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult_0S1B) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("279");
+    GuessResult result = baseball.guess("279");
 
     checkResult(result, false, 0, 1);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult_0S3B) {
-    Baseball game{ "123" };
-    GuessResult result = game.guess("312");
+    GuessResult result = baseball.guess("312");
 
     checkResult(result, false, 0, 3);
 }
