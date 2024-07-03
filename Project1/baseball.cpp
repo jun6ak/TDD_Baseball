@@ -33,7 +33,15 @@ public:
             strikes++;
         }
 
-        return { false, strikes, 0 };
+        int balls = 0;
+        if (guessNumber[0] == question[2]) balls++;
+        if (guessNumber[2] == question[0]) balls++;
+        if (guessNumber[2] == question[1]) balls++;
+        if (guessNumber[0] == question[1]) balls++;
+        if (guessNumber[1] == question[2]) balls++;
+        if (guessNumber[1] == question[0]) balls++;
+
+        return { false, strikes, balls };
     }
 
 private:

@@ -56,3 +56,24 @@ TEST_F(TestBaseballFixture, ReturnSolvedResult2_2S0B) {
 
     checkResult(result, false, 2, 0);
 }
+
+TEST_F(TestBaseballFixture, ReturnSolvedResult_1S2B) {
+    Baseball game{ "123" };
+    GuessResult result = game.guess("321");
+
+    checkResult(result, false, 1, 2);
+}
+
+TEST_F(TestBaseballFixture, ReturnSolvedResult_0S1B) {
+    Baseball game{ "123" };
+    GuessResult result = game.guess("279");
+
+    checkResult(result, false, 0, 1);
+}
+
+TEST_F(TestBaseballFixture, ReturnSolvedResult_0S3B) {
+    Baseball game{ "123" };
+    GuessResult result = game.guess("312");
+
+    checkResult(result, false, 0, 3);
+}
