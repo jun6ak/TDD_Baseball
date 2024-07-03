@@ -18,8 +18,15 @@ protected:
         }
         catch (exception& e)
         {
-            ; // do nothing
+            ; // PASS
         }
+    }
+
+    void checkResult(GuessResult result, bool solved, int strikes, int balls)
+    {
+        EXPECT_EQ(result.solved, solved);
+        EXPECT_EQ(result.strikes, strikes);
+        EXPECT_EQ(result.balls, balls);
     }
 };
 
@@ -33,25 +40,19 @@ TEST_F(TestBaseballFixture, ReturnSolvedResultIfMatchedNumber) {
     Baseball game{ "123" };
     GuessResult result = game.guess("123");
 
-    EXPECT_TRUE(result.solved);
-    EXPECT_EQ(result.strikes, 3);
-    EXPECT_EQ(result.balls, 0);
+    checkResult(result, true, 3, 0);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult1_2S0B) {
     Baseball game{ "123" };
     GuessResult result = game.guess("124");
 
-    EXPECT_FALSE(result.solved);
-    EXPECT_EQ(result.strikes, 2);
-    EXPECT_EQ(result.balls, 0);
+    checkResult(result, false, 2, 0);
 }
 
 TEST_F(TestBaseballFixture, ReturnSolvedResult2_2S0B) {
     Baseball game{ "123" };
     GuessResult result = game.guess("423");
 
-    EXPECT_FALSE(result.solved);
-    EXPECT_EQ(result.strikes, 2);
-    EXPECT_EQ(result.balls, 0);
+    checkResult(result, false, 2, 0);
 }

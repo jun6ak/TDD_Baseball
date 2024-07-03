@@ -25,21 +25,15 @@ public:
             return { true, 3, 0 };
         }
 
-        if ((guessNumber[0] == question[0])
-            && (guessNumber[1] == question[1])
-            && (guessNumber[2] != question[2]))
+        int strikes = 0;
+        for (int i = 0; i < 3; i++)
         {
-            return { false, 2, 0 };
+            if (guessNumber[i] != question[i]) continue;
+            
+            strikes++;
         }
 
-        if ((guessNumber[0] != question[0])
-            && (guessNumber[1] == question[1])
-            && (guessNumber[2] == question[2]))
-        {
-            return { false, 2, 0 };
-        }
-
-        return { false, 0, 0 };
+        return { false, strikes, 0 };
     }
 
 private:
