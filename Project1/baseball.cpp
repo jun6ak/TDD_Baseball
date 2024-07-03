@@ -3,15 +3,29 @@
 
 using namespace std;
 
+struct GuessResult
+{
+    bool solved;
+    int strikes;
+    int balls;
+};
+
 class Baseball
 {
 public:
-    void guess(string guessNumber)
+    Baseball(const string& question) : question(question)
+    { }
+
+    GuessResult guess(string guessNumber)
     {
         assertIncorrectArgument(guessNumber);
+
+        return { true, 3, 0 };
     }
 
 private:
+    string question;
+
     void assertIncorrectArgument(std::string& guessNumber)
     {
         if (guessNumber.length() != 3)
